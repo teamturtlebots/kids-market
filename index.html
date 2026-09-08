@@ -316,31 +316,7 @@
   .empty-row td{ text-align:center; color:var(--muted); padding:26px 12px; font-style:normal; }
   .log-card .table-scroll{ max-height:480px; overflow-y:auto; }
 
-  .reconcile-card{ margin-top:16px; }
-  .reconcile-grid{
-    display:grid; grid-template-columns:repeat(auto-fit, minmax(190px,1fr)); gap:12px; margin-bottom:16px;
-  }
-  .rc-tile{ border:1px solid var(--border); border-radius:10px; padding:11px 13px; background:var(--surface-2); }
-  .rc-tile .rc-name{ font-size:11.5px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; margin-bottom:6px; }
-  .rc-tile .rc-calc{ font-size:12px; color:var(--muted); margin-bottom:6px; }
-  .rc-tile .rc-calc b{ color:var(--ink); font-family:'JetBrains Mono',monospace; }
-  .rc-diff{ margin-top:7px; font-size:12px; font-weight:700; padding:3px 8px; border-radius:999px; display:inline-block; }
-  .rc-diff.good{ background:var(--good-bg); color:var(--good); }
-  .rc-diff.warn{ background:var(--warn-bg); color:var(--warn); }
-
-  .reconcile-extra{ display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:12px; margin-bottom:16px; }
-  .extra-field label{ margin-bottom:5px; }
-  .label-with-input{ display:flex; gap:6px; }
-  .label-with-input input:first-child{ flex:1.3; }
-  .label-with-input input:last-child{ flex:1; }
-
-  .reconcile-summary{
-    display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:space-between;
-    background:var(--surface-2); border:1px solid var(--border); border-radius:10px; padding:14px 16px; margin-bottom:14px;
-  }
-  .net-label{ font-size:12.5px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; }
-  .net-value{ font-family:'JetBrains Mono', monospace; font-weight:600; font-size:24px; }
-  .actions-row{ display:flex; gap:10px; flex-wrap:wrap; }
+  .actions-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; }
   .actions-row[hidden]{ display:none; }
 
   .export-card{ margin-top:16px; }
@@ -378,9 +354,6 @@
     </button>
     <button type="button" class="tab-btn" data-tab="log" role="tab" aria-selected="false">
       <span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></span>Log
-    </button>
-    <button type="button" class="tab-btn" data-tab="export" role="tab" aria-selected="false">
-      <span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></span>Export
     </button>
     <button type="button" class="tab-btn" data-tab="settings" role="tab" aria-selected="false">
       <span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82A1.65 1.65 0 0 0 3 13.09H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>Settings
@@ -485,44 +458,9 @@
             <tbody id="logBody"><tr class="empty-row"><td colspan="11">No sales logged yet — the first one you add will show up here for the whole team.</td></tr></tbody>
           </table>
         </div>
-      </div>
-    </section>
-
-    <section class="tab-panel" id="panel-export" hidden>
-      <div class="card">
-        <h2>End-of-day reconciliation</h2>
-        <div class="reconcile-grid" id="reconcileGrid"></div>
-
-        <div class="reconcile-extra">
-          <div class="extra-field"><label for="commissionInput">Commission payment</label><input id="commissionInput" class="price-input" type="number" step="0.01" value="0"></div>
-          <div class="extra-field"><label for="regFeeInput">Registration + card fee</label><input id="regFeeInput" class="price-input" type="number" step="0.01" value="0"></div>
-          <div class="extra-field">
-            <label>Donation</label>
-            <div class="label-with-input">
-              <input id="donationLabelInput" type="text" value="Donation" placeholder="Recipient">
-              <input id="donationAmtInput" class="price-input" type="number" step="0.01" value="0">
-            </div>
-          </div>
-          <div class="extra-field">
-            <label>Cost / reimbursement</label>
-            <div class="label-with-input">
-              <input id="costLabelInput" type="text" value="Cost to supplier" placeholder="What for">
-              <input id="costAmtInput" class="price-input" type="number" step="0.01" value="0">
-            </div>
-          </div>
-        </div>
-
-        <div class="reconcile-summary">
-          <div><div class="net-label">Net proceeds</div><div class="net-value mono" id="netProceeds">$0.00</div></div>
-          <div class="actions-row"><button class="btn btn-primary" id="saveCountsBtn">Save counts</button></div>
-        </div>
-      </div>
-
-      <div class="card">
-        <h2>Export &amp; close out</h2>
-        <p class="muted" style="margin:0 0 14px;">Export the log and reconciliation to an Excel workbook shaped like your market accounting sheet. Once it's downloaded and checked, archive the day to start fresh for the next market.</p>
+        <p class="muted" style="margin:14px 0 0;">Export the log below as a CSV file — opens straight in Excel, Google Sheets, or Numbers. Once it's downloaded and checked, archive the day to start fresh for the next market.</p>
         <div class="actions-row">
-          <button class="btn btn-primary" id="exportBtn"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><polyline points="7 10 12 15 17 10"/><path d="M5 21h14"/></svg></span>Export to Excel</button>
+          <button class="btn btn-primary" id="exportBtn"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><polyline points="7 10 12 15 17 10"/><path d="M5 21h14"/></svg></span>Export to CSV</button>
           <button class="btn btn-warm" id="archiveBtn"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="5" rx="1"/><path d="M5 9v9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9"/><line x1="10" y1="13" x2="14" y2="13"/></svg></span>Archive &amp; start new day</button>
         </div>
       </div>
@@ -563,7 +501,6 @@
 
 <div class="toast-wrap" id="toastWrap"></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.20.3/xlsx.full.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 <script>
@@ -581,12 +518,6 @@
     {name:"Turtle", price:10},
     {name:"Donation / Other", price:0}
   ];
-  var DEFAULT_COUNTS = {
-    cash:0, venmo:0, zelle:0, paypal:0, creditCard:0,
-    commission:0, regFee:0,
-    donationLabel:"Donation", donation:0,
-    costLabel:"Cost to supplier", cost:0
-  };
   var DEFAULT_EVENT = { name:"Team Turtlebots Market", date: new Date().toISOString().slice(0,10) };
 
   var PM_KEY = { "Cash":"cash", "Venmo":"venmo", "Zelle":"zelle", "PayPal":"paypal", "Credit Card":"creditCard" };
@@ -595,14 +526,12 @@
   var STORAGE_KEYS = {
     sales: "dragonMarket.sales",
     products: "dragonMarket.products",
-    counts: "dragonMarket.counts",
     event: "dragonMarket.event",
     archive: "dragonMarket.archive"
   };
   var storageOk = true;
   var sales = [];              // [{id, item, unitPrice, qty, discount, total, payment, comments, soldBy, ts}]
   var products = DEFAULT_PRODUCTS.slice();
-  var counts = Object.assign({}, DEFAULT_COUNTS);
   var eventInfo = Object.assign({}, DEFAULT_EVENT);
 
   function readStorage(key, fallback){
@@ -619,12 +548,10 @@
   function loadState(){
     sales = readStorage(STORAGE_KEYS.sales, []);
     products = readStorage(STORAGE_KEYS.products, DEFAULT_PRODUCTS.slice());
-    counts = Object.assign({}, DEFAULT_COUNTS, readStorage(STORAGE_KEYS.counts, {}));
     eventInfo = Object.assign({}, DEFAULT_EVENT, readStorage(STORAGE_KEYS.event, {}));
   }
   function saveSales(){ writeStorage(STORAGE_KEYS.sales, sales); }
   function saveProducts(){ writeStorage(STORAGE_KEYS.products, products); }
-  function saveCounts(){ writeStorage(STORAGE_KEYS.counts, counts); }
   function saveEvent(){ writeStorage(STORAGE_KEYS.event, eventInfo); }
 
   // ---------------- cloud sync (Firebase Firestore) ----------------
@@ -736,12 +663,6 @@
       renderAll();
     }));
 
-    cloudUnsubs.push(fdb.collection("config").doc("counts").onSnapshot(function(doc){
-      counts = Object.assign({}, DEFAULT_COUNTS, doc.exists ? doc.data() : {});
-      syncCountsFieldsFromState();
-      renderAll();
-    }));
-
     cloudUnsubs.push(fdb.collection("config").doc("event").onSnapshot(function(doc){
       eventInfo = Object.assign({}, DEFAULT_EVENT, doc.exists ? doc.data() : {});
       document.getElementById("eventName").value = eventInfo.name;
@@ -797,7 +718,6 @@
     renderItemTiles();
     renderItemStatTiles();
     renderProductManager();
-    syncCountsFieldsFromState();
     renderAll();
     renderDbStatus();
     setSyncStatus();
@@ -851,7 +771,7 @@
   }
 
   // ---------------- tabs ----------------
-  var TABS = ["add","totals","log","export","settings"];
+  var TABS = ["add","totals","log","settings"];
   function setTab(name){
     TABS.forEach(function(t){
       var panel = document.getElementById("panel-" + t);
@@ -1247,74 +1167,6 @@
     return t;
   }
 
-  function renderReconcile(t){
-    var grid = document.getElementById("reconcileGrid");
-    grid.innerHTML = "";
-    PAYMENT_METHODS.forEach(function(m){
-      var key = PM_KEY[m];
-      var calc = t.byMethod[m] || 0;
-      var counted = Number(counts[key]) || 0;
-      var diff = counted - calc;
-      var tile = document.createElement("div");
-      tile.className = "rc-tile";
-      var diffClass = Math.abs(diff) < 0.005 ? "good" : "warn";
-      var diffLabel = Math.abs(diff) < 0.005 ? "Matches" : (diff > 0 ? "+" + fmt$(diff) + " over" : fmt$(diff) + " short");
-      tile.innerHTML =
-        '<div class="rc-name">' + m + '</div>' +
-        '<div class="rc-calc">Calculated <b class="mono">' + fmt$(calc) + '</b></div>' +
-        '<label style="margin-bottom:4px;">Counted</label>' +
-        '<input type="number" step="0.01" class="price-input rc-input" data-key="' + key + '" value="' + counted + '">' +
-        '<div class="rc-diff ' + diffClass + '">' + diffLabel + '</div>';
-      tile.querySelector(".rc-input").addEventListener("input", function(e){
-        counts[key] = Number(e.target.value) || 0;
-        renderReconcile(computeTotals());
-        renderNet(t.total);
-      });
-      grid.appendChild(tile);
-    });
-  }
-
-  function renderNet(totalRevenue){
-    var commission = Number(document.getElementById("commissionInput").value) || 0;
-    var regFee = Number(document.getElementById("regFeeInput").value) || 0;
-    var donation = Number(document.getElementById("donationAmtInput").value) || 0;
-    var cost = Number(document.getElementById("costAmtInput").value) || 0;
-    var net = totalRevenue - commission - regFee - donation - cost;
-    document.getElementById("netProceeds").textContent = fmt$(net);
-  }
-
-  function syncCountsFieldsFromState(){
-    document.getElementById("commissionInput").value = counts.commission || 0;
-    document.getElementById("regFeeInput").value = counts.regFee || 0;
-    document.getElementById("donationLabelInput").value = counts.donationLabel || "Donation";
-    document.getElementById("donationAmtInput").value = counts.donation || 0;
-    document.getElementById("costLabelInput").value = counts.costLabel || "Cost to supplier";
-    document.getElementById("costAmtInput").value = counts.cost || 0;
-  }
-
-  ["commissionInput","regFeeInput","donationAmtInput","costAmtInput"].forEach(function(id){
-    document.getElementById(id).addEventListener("input", function(){
-      renderNet(computeTotals().total);
-    });
-  });
-
-  document.getElementById("saveCountsBtn").addEventListener("click", function(){
-    counts.commission = Number(document.getElementById("commissionInput").value) || 0;
-    counts.regFee = Number(document.getElementById("regFeeInput").value) || 0;
-    counts.donationLabel = document.getElementById("donationLabelInput").value.trim() || "Donation";
-    counts.donation = Number(document.getElementById("donationAmtInput").value) || 0;
-    counts.costLabel = document.getElementById("costLabelInput").value.trim() || "Cost to supplier";
-    counts.cost = Number(document.getElementById("costAmtInput").value) || 0;
-    if (cloudMode) {
-      fdb.collection("config").doc("counts").set(counts).catch(function(err){
-        toast("Couldn't save counts: " + (err.message || err), true);
-      });
-    } else {
-      saveCounts();
-    }
-    toast("Counts saved");
-  });
-
   document.getElementById("eventName").addEventListener("change", function(e){
     eventInfo.name = e.target.value.trim() || DEFAULT_EVENT.name;
     if (cloudMode) {
@@ -1339,70 +1191,61 @@
     renderCart();
     renderProductManager();
     renderLog();
-    var t = renderTotals();
-    renderReconcile(t);
-    renderNet(t.total);
+    renderTotals();
   }
 
-  // ---------------- export ----------------
-  function buildWorkbook(){
-    var t = computeTotals();
-    var itemRows = computeItemSummaries();
+  // ---------------- export (plain CSV — no external library needed) ----------------
+  function csvField(v){
+    if (v === null || v === undefined) v = "";
+    var s = String(v);
+    if (/[",\n\r]/.test(s)) s = '"' + s.replace(/"/g, '""') + '"';
+    return s;
+  }
+  function csvRow(arr){ return arr.map(csvField).join(",") + "\r\n"; }
+  function money(n){ return (Math.round((Number(n)||0) * 100) / 100).toFixed(2); }
 
+  function buildCsv(){
     var orderNumbers = computeOrderNumbers();
-    var logAoa = [["Order #","Item","Quantity","Unit Price","Discount/Tip","Total Price","Payment Method","Sold By","Comments","Time"]];
+
+    var out = "";
+    out += csvRow(["Team Turtlebots Market Tracker — Sales Log"]);
+    out += csvRow([eventInfo.name || "", eventInfo.date || new Date().toISOString().slice(0,10)]);
+    out += "\r\n";
+
+    out += csvRow(["Order #","Item","Quantity","Unit Price","Discount/Tip","Total Price","Payment Method","Sold By","Comments","Time"]);
     sales.slice().sort(function(a,b){ return a.ts - b.ts; }).forEach(function(s){
-      logAoa.push([
+      out += csvRow([
         s.orderId ? orderNumbers[s.orderId] : "",
-        s.item, s.qty, s.unitPrice, s.discount || 0, s.total, s.payment, s.soldBy || "", s.comments || "", new Date(s.ts).toLocaleString()
+        s.item, s.qty, money(s.unitPrice), money(s.discount || 0), money(s.total),
+        s.payment, s.soldBy || "", s.comments || "", new Date(s.ts).toLocaleString()
       ]);
     });
-    var ws1 = XLSX.utils.aoa_to_sheet(logAoa);
-    ws1["!cols"] = [{wch:9},{wch:16},{wch:9},{wch:11},{wch:13},{wch:11},{wch:14},{wch:12},{wch:28},{wch:19}];
 
-    var sumAoa = [["Item","Units Sold","Unit Price","List Revenue","Collected"]];
-    itemRows.forEach(function(r){ sumAoa.push([r.item, r.qty, r.unitPrice, r.listRevenue, r.collected]); });
-    sumAoa.push([]);
-    sumAoa.push(["Payment Method","Calculated","Counted","Difference"]);
-    PAYMENT_METHODS.forEach(function(m){
-      var key = PM_KEY[m];
-      var calc = t.byMethod[m] || 0;
-      var counted = Number(counts[key]) || 0;
-      sumAoa.push([m, calc, counted, counted - calc]);
-    });
-    sumAoa.push([]);
-    var netVal = t.total - (Number(counts.commission)||0) - (Number(counts.regFee)||0) - (Number(counts.donation)||0) - (Number(counts.cost)||0);
-    sumAoa.push(["Total Revenue (calculated)", t.total]);
-    sumAoa.push(["Commission payment", Number(counts.commission)||0]);
-    sumAoa.push(["Registration + credit card fee", Number(counts.regFee)||0]);
-    sumAoa.push([counts.donationLabel || "Donation", Number(counts.donation)||0]);
-    sumAoa.push([counts.costLabel || "Cost to supplier", Number(counts.cost)||0]);
-    sumAoa.push(["Net proceeds", netVal]);
-    var ws2 = XLSX.utils.aoa_to_sheet(sumAoa);
-    ws2["!cols"] = [{wch:28},{wch:14},{wch:12},{wch:12}];
-
-    var wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws1, "Sales Log");
-    XLSX.utils.book_append_sheet(wb, ws2, "Summary");
-    return wb;
+    return out;
   }
 
   document.getElementById("exportBtn").addEventListener("click", function(){
     if (!sales.length) { toast("No sales logged yet — nothing to export", true); return; }
     try {
-      var wb = buildWorkbook();
-      var wbout = XLSX.write(wb, { bookType:"xlsx", type:"array" });
-      var blob = new Blob([wbout], { type:"application/octet-stream" });
+      var csv = "﻿" + buildCsv(); // BOM so Excel opens $ / special characters correctly
+      var blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
       var safeName = (eventInfo.name || "market").replace(/[^a-z0-9]+/gi, "-").toLowerCase();
-      var filename = "turtlebots-market-" + safeName + "-" + (eventInfo.date || new Date().toISOString().slice(0,10)) + ".xlsx";
-      var url = URL.createObjectURL(blob);
-      var a = document.createElement("a");
-      a.href = url;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+      var filename = "turtlebots-market-" + safeName + "-" + (eventInfo.date || new Date().toISOString().slice(0,10)) + ".csv";
+
+      if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+        window.navigator.msSaveOrOpenBlob(blob, filename); // old Edge/IE fallback
+      } else {
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        a.href = url;
+        a.download = filename;
+        a.rel = "noopener";
+        a.style.display = "none";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+      }
       toast("Exported " + filename);
     } catch (err) {
       toast("Export failed — try again", true);
@@ -1411,11 +1254,11 @@
 
   document.getElementById("archiveBtn").addEventListener("click", function(){
     if (!sales.length) { toast("Nothing to archive yet", true); return; }
-    if (!confirm("Make sure you've exported today's log first!\n\nThis will clear the current sales log and counts so the team can start a fresh day. Continue?")) return;
+    if (!confirm("Make sure you've exported today's log first!\n\nThis will clear the current sales log so the team can start a fresh day. Continue?")) return;
     var snapshotData = {
       eventName: eventInfo.name, eventDate: eventInfo.date,
       sales: sales.map(function(s){ return Object.assign({}, s); }),
-      counts: counts, archivedAt: Date.now()
+      archivedAt: Date.now()
     };
 
     if (cloudMode) {
@@ -1433,10 +1276,6 @@
           });
         }, Promise.resolve());
       }).then(function(){
-        counts = Object.assign({}, DEFAULT_COUNTS);
-        return fdb.collection("config").doc("counts").set(counts);
-      }).then(function(){
-        syncCountsFieldsFromState();
         toast("Day archived — ready for the next market!");
       }).catch(function(err){
         toast("Archive failed: " + (err.message || err), true);
@@ -1447,10 +1286,7 @@
       writeStorage(STORAGE_KEYS.archive, archive);
 
       sales = [];
-      counts = Object.assign({}, DEFAULT_COUNTS);
       saveSales();
-      saveCounts();
-      syncCountsFieldsFromState();
       renderAll();
       toast("Day archived — ready for the next market!");
     }
@@ -1488,7 +1324,6 @@
     cart = {};
     renderItemStatTiles();
     renderProductManager();
-    syncCountsFieldsFromState();
     renderAll();
   });
 
@@ -1504,7 +1339,6 @@
     if (!eventInfo.date) { eventInfo.date = new Date().toISOString().slice(0,10); saveEvent(); }
     document.getElementById("eventName").value = eventInfo.name;
   }
-  syncCountsFieldsFromState();
   renderPaymentStatTiles();
   renderItemStatTiles();
   renderPaymentButtons();
